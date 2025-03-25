@@ -1,0 +1,77 @@
+<div class="app-container">
+  <header class="header">
+    <div class="header-content">
+      <h1 class="app-title">GEMINI Date Parser</h1>
+    </div>
+  </header>
+
+<main class="main-content">
+  <div class="two-column-layout">
+    <div class="left-column">
+      <div class="form-card">
+        <h2 class="form-title">Text Analysis</h2>
+        <form class="parser-form">
+          <div class="form-group">
+            <label for="requestText">Enter your text to extract dates</label>
+            <textarea 
+              id="requestText"
+              class="form-control" 
+              placeholder="Type or paste your text containing dates here..." 
+              [(ngModel)]="requestText"
+              name="requestText"
+              rows="5"
+            ></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-process" (click)="processText()">
+              Process Text
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="response-card">
+        <h2 class="card-title">Results</h2>
+        <div class="result-content">
+          <div class="result-item">
+            <span class="result-label">Date</span>
+            <span class="result-value">{{responseDate}}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Text</span>
+            <span class="result-value">{{sentText}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="right-column">
+      <div class="history-card">
+        <div class="card-header">
+          <h2 class="card-title">History</h2>
+          <button type="button" class="btn-refresh" (click)="fetchHistory()">
+            <span class="btn-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+              </svg>
+            </span>
+            Refresh History
+          </button>
+        </div>
+        <div class="history-list">
+          <div class="history-item" *ngFor="let item of history">
+            <div class="history-request">
+              <strong>Request:</strong> {{ item.requestText }}
+            </div>
+            <div class="history-response">
+              <strong>Response:</strong> 
+              <pre>{{ item.parsedDate }}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

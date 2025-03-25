@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../server
+      dockerfile: dockerfile
+    container_name: backend-service
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../server/.env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/date_requests_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Koon@2001
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  frontend:
+    build: ../client
+    container_name: frontend-service
+    ports:
+      - "4201:4300"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Koon@2001
+      MYSQL_DATABASE: date_requests_db
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

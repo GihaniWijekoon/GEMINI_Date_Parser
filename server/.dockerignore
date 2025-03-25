@@ -1,0 +1,23 @@
+# Ignore Maven and Gradle build directories
+target/
+!target/*.jar
+build/
+
+# Ignore dependency directories
+.mvn/
+node_modules/
+
+# Ignore temporary and system files
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+
+# Ignore IDE files
+.idea/
+.vscode/
+*.iml
+
+.env
+**/.env
