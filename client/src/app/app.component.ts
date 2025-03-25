@@ -29,7 +29,7 @@ export class AppComponent {
           this.response = data;
           this.responseDate = data.parsedDate;
           this.sentText = data.requestText;
-          this.history.push({ request: this.requestText, response: data });
+          this.history.push({ requestText: this.sentText, parsedDate: this.responseDate });
           this.requestText = ''; 
         },
         (error) => {

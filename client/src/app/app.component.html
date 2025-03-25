@@ -61,7 +61,7 @@
           </button>
         </div>
         <div class="history-list">
-          <div class="history-item" *ngFor="let item of history">
+          <div class="history-item" *ngFor="let item of history.slice().reverse()">
             <div class="history-request">
               <strong>Request:</strong> {{ item.requestText }}
             </div>
